@@ -1,13 +1,16 @@
 # trustymail
 
-Trustymail mail server trust manager.  Takes a list of addresses or domains of trusted senders and generates whitelists
-in Postgrey, SpamAssassin, etc.
+Takes a list of email addresses or domains of trusted senders and generates whitelist files for Postgrey, SpamAssassin, etc.
 
 ## Running
 
--S: Path to the sender list.
--A: Path to the spamassassin whitelist. (optional)
--P: Path to the postgrey whitelist. (optional)
+The sender list should be a plaintext file with one email address or domain per line.  Comments prefixed with *#* are permitted.
+
+    -S: Path to the sender list.
+    -A: Path to the spamassassin whitelist. (optional)
+    -P: Path to the postgrey whitelist. (optional)
+
+Example:
 
 `python trustymail.py -S ~/senders.txt -A /etc/spamassassin/local_whitelist.cf -P /etc/postgrey/whitelist_clients.local`
 
