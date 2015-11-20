@@ -9,10 +9,21 @@ COMMENT_PREFIX='#'
 def WritePostgrey(path, addresses):
   try:
     with open(path, 'w') as pconf:
-      for line in addresses:
-        pconf.write('%s\n' % line)
+      for addr in addresses:
+        pconf.write('%s\n' % addr)
   except IOError as e:
-    logging.error('failure updating postfix: %s', str(e))
+    logging.error('failure updating postgrey: %s', str(e))
+
+
+def WriteSpamAss(path, addresses):
+  try:
+    with open(path, 'w') as pconf:
+      for addr in addresses:
+        if '@' not in addr:
+          addr = '*@%s' % addr
+        pconf.write('whitelist_from %s\n' % addr)
+  except IOError as e:
+    logging.error('failure updating spamassassin: %s', str(e))
 
 
 def main():
@@ -27,6 +38,9 @@ def main():
     if line and line[0] is not COMMENT_PREFIX:
       addresses.append(line)
   addresses.sort()
+  if args.spamassassin_file:
+    logging.info('updating spamassassin file %s', args.spamassassin_file)
+    WriteSpamAss(args.spamassassin_file, addresses)
   if args.postgrey_file:
     logging.info('updating postgrey file %s', args.postgrey_file)
     WritePostgrey(args.postgrey_file, addresses)
