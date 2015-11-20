@@ -12,7 +12,7 @@ The sender list should be a plaintext file with one email address or domain per 
 
 Example:
 
-`python trustymail.py -S ~/senders.txt -P --postgrey_file /etc/postgrey/whitelist_clients.local`
+`python trustymail.py -T ~/senders.txt -P --postgrey_file /etc/postgrey/whitelist_clients.local`
 
 ## Postgrey Support
 
