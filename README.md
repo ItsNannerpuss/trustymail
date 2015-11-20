@@ -6,13 +6,13 @@ Takes a list of email addresses or domains of trusted senders and generates whit
 
 The sender list should be a plaintext file with one email address or domain per line.  Comments prefixed with *#* are permitted.
 
-    -S: Path to the sender list.
-    -A: Path to the spamassassin whitelist. (optional)
-    -P: Path to the postgrey whitelist. (optional)
+    -T: Path to the trusted sender list.
+    -P: Enable Postgrey configuration output.
+    -S: Enable SpamAssassin configuration output.
 
 Example:
 
-`python trustymail.py -S ~/senders.txt -A /etc/spamassassin/local_whitelist.cf -P /etc/postgrey/whitelist_clients.local`
+`python trustymail.py -S ~/senders.txt -P --postgrey_file /etc/postgrey/whitelist_clients.local`
 
 ## Postgrey Support
 
